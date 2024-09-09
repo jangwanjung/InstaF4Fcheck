@@ -16,14 +16,13 @@
     <br>
     <br>
     <h2>인스타 맞팔 추적기</h2>
-    <a href="https://www.instagram.com/">인스타로그인</a>
-    <a href="https://www.instagram.com/web/search/topsearch/?query=jangwanjung">a</a>
+    <br>
     <form action="/check" method="post">
         <div class="form-group">
             <label for="username">아이디</label>
             <input type="text" class="form-control" id="username" placeholder="id입력" name="username">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">확인하기</button>
     </form>
 </div>
 

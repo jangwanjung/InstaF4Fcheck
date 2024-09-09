@@ -13,10 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -63,6 +60,7 @@ public class Controller {
             e.printStackTrace();
         }
         List<String> followersList = new ArrayList<>();
+        HashMap<String, String> followersMap = new HashMap<>();
         String endCursor = null;
         boolean hasNextPage = true;
         while (hasNextPage) {
@@ -87,6 +85,7 @@ public class Controller {
                     String fullName = user.path("full_name").asText();
                     String profileUrl = user.path("profile_pic_url").asText();
                     followersList.add(userName);
+                    followersMap.put(userName, fullName);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -95,8 +94,9 @@ public class Controller {
 
         System.out.println("팔로워리스트"+followersList);
         System.out.println("팔로워수: "+followersList.size());
-        
+
         List<String> followingList = new ArrayList<>();
+        HashMap<String, String> followingMap = new HashMap<>();
         endCursor = null;
         hasNextPage = true;
 
@@ -121,6 +121,7 @@ public class Controller {
                     String fullName = user.path("full_name").asText();
                     String profileUrl = user.path("profile_pic_url").asText();
                     followingList.add(userName);
+                    followingMap.put(userName, fullName);
                 }
 
             } catch (IOException e) {
@@ -131,7 +132,7 @@ public class Controller {
 
         System.out.println("팔로잉리스트"+followingList);
         System.out.println("팔로잉수: "+followingList.size());
-        
+
 
         List<String> dontFollowMeBack = new ArrayList<>();
         for (String following : followingList) {
@@ -155,6 +156,8 @@ public class Controller {
         System.out.println("시간 : " + duration + " 밀리초");
         model.addAttribute("dontFollowMeBack",dontFollowMeBack);
         model.addAttribute("iDontFollowBack",iDontFollowBack);
+        model.addAttribute("followersMap",followersMap);
+        model.addAttribute("followingMap",followingMap);
 
 
 
@@ -163,3 +166,5 @@ public class Controller {
                 "내가 팔로우를 안한사람 : "+iDontFollowBack+"<br>"+"나를 팔로우 안한사람 : "+dontFollowMeBack;*/
     }
 }
+
+
