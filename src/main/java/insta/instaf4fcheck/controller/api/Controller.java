@@ -53,8 +53,14 @@ public class Controller {
                 if (foundUsername.equals(username)) {
                     instaId = user.path("pk").asText();
                     System.out.println("Username: " + foundUsername + ", ID: " + instaId);
+                    if(user.path("is_private").asText().equals("true")){
+                        return "비공개계정";
+                    }
                     break;
                 }
+            }
+            if(instaId == null){
+                return "못찾음";
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -92,9 +98,6 @@ public class Controller {
             }
         }
 
-        System.out.println("팔로워리스트"+followersList);
-        System.out.println("팔로워수: "+followersList.size());
-
         List<String> followingList = new ArrayList<>();
         HashMap<String, String> followingMap = new HashMap<>();
         endCursor = null;
@@ -130,10 +133,6 @@ public class Controller {
         }
 
 
-        System.out.println("팔로잉리스트"+followingList);
-        System.out.println("팔로잉수: "+followingList.size());
-
-
         List<String> dontFollowMeBack = new ArrayList<>();
         for (String following : followingList) {
             if (!followersList.contains(following)) {
@@ -148,9 +147,6 @@ public class Controller {
             }
         }
 
-        System.out.println("나를 팔로우하지 않는 사람들: " + dontFollowMeBack);
-        System.out.println("팔로우하지 않은 사람들: " + iDontFollowBack);
-
         long endTime = System.currentTimeMillis(); // 종료 시간 측정
         long duration = endTime - startTime; // 걸린 시간 계산
         System.out.println("시간 : " + duration + " 밀리초");
@@ -161,9 +157,7 @@ public class Controller {
 
 
 
-        return "result"; /*"팔로워수 : "+followersList.size()+"<br>"+"팔로잉수 : "+followingList.size()+"<br>"+
-                "내가 팔로우를 안한사람수 : "+iDontFollowBack.size()+"<br>"+"나를 팔로우 안한사람 수 : "+dontFollowMeBack.size()+"<br>"+
-                "내가 팔로우를 안한사람 : "+iDontFollowBack+"<br>"+"나를 팔로우 안한사람 : "+dontFollowMeBack;*/
+        return "result";
     }
 }
 
