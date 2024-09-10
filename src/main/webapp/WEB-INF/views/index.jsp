@@ -20,7 +20,7 @@
     <br>
     ⚠️팔로워수와 팔로잉수의 합이 1000명이면 대략 10초가걸립니다
     <br>
-    ️ ⚠️팔로워수와 팔로잉수가 2000명이상인 계정은 검색하지말아주세요~
+    ️ ⚠️팔로워수와 팔로잉수가 2000명이상인 계정검색이불가능합니다.
     <br>
     <br>
     <form id="checkForm" action="/check" method="post" onsubmit="showLoading()">
