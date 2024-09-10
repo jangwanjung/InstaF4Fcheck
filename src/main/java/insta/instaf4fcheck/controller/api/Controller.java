@@ -65,6 +65,7 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        int cnt= 0;
         List<String> followersList = new ArrayList<>();
         HashMap<String, String> followersMap = new HashMap<>();
         String endCursor = null;
@@ -76,7 +77,10 @@ public class Controller {
             URI uri2 = new URI(url2);
 
             ResponseEntity<String> response2 = rt.exchange(uri2, HttpMethod.GET, entity, String.class);
-
+            cnt+=1;
+            if(cnt>50){
+                return "많은요청";
+            }
             String responseBody2 = response2.getBody();
             try {
                 JsonNode rootNode = objectMapper.readTree(responseBody2);
@@ -110,6 +114,10 @@ public class Controller {
             URI uri3 = new URI(url3);
 
             ResponseEntity<String> response3 = rt.exchange(uri3, HttpMethod.GET, entity, String.class);
+            cnt+=1;
+            if(cnt>50){
+                return "많은요청";
+            }
             String responseBody3 = response3.getBody();
             try {
                 JsonNode rootNode = objectMapper.readTree(responseBody3);
