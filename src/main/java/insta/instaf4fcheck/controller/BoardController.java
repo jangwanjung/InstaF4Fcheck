@@ -10,6 +10,7 @@ public class BoardController {
 
     @GetMapping("/")
     public String index(){
+        System.out.println("접속");
         return "index";
     }
 }
